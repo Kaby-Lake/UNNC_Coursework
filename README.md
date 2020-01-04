@@ -3,7 +3,7 @@
 ![MacDown logo](http://macdown.uranusjr.com/static/images/logo-160.png)
 
 ## UNNC Computer Science Courseworks
-###(Public After Deadline)
+(Public After Deadline)
 | Coursework | Mark |
 | :------: | :------: |
 | [Computer Fundamentals 1](https://github.com/imaginebreake/Academic-Courseworks-Public/tree/master/cf_cw1) | ?? / 25 |
