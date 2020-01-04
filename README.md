@@ -4,7 +4,7 @@
 
 | Coursework | Mark |
 | :------: | :------: |
-| [Computer Fundamentals 1](https://github.com/imaginebreake/Academic-Courseworks-Public/tree/master/cf_cw1) | ?? / 25 |
-| [Computer Fundamentals 2](https://github.com/imaginebreake/Academic-Courseworks-Public/tree/master/cf_cw2) | ?? / 25 |
-| [System And Architecture](https://github.com/imaginebreake/Academic-Courseworks-Public/tree/master/sys_arch_cw) | ??? / 100 |
-| [Programming And Algorithms](https://github.com/imaginebreake/Academic-Courseworks-Public/tree/master/pga_cw4) | ??? / 100 |
+| [Computer Fundamentals 1](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Computer_Fundamentals_1) | ?? / 25 |
+| [Computer Fundamentals 2](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Computer_Fundamentals_2) | ?? / 25 |
+| [System And Architecture](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/System_and_Architecture) | ??? / 100 |
+| [Programming And Algorithms](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Programming_and_Algorithms) | ??? / 100 |
