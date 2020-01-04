@@ -1,0 +1,29 @@
+// This file is part of CSF 2019 Coursework Part Ⅰ
+// by 20126507 hnyzx3 Zichen Xu.
+
+/**CUSTOMIZED CHIP INSIDE
+ * >> Add16OF
+*/
+/**
+ * Subtracts two 2's compliment 16-bit values.
+ * output "of" as overflow sign.
+ * the "of" can detect positive and negative overflow as well
+ * the negative overflow is not asked in the coursework description, but I did it ^_^
+ */
+
+CHIP Sub16 {
+    IN
+        a[16], b[16];
+
+    OUT
+        out[16],
+        of; //Output overflow
+
+    PARTS:
+    // x-y == x+(-y)
+    Not16(in=b, out=notb);
+    Inc16(in=notb, out=arithmaticNotb);   //-y = (bitwise not of y) + increase by 1-bit 1.
+
+    Add16OF(a=a, b=arithmaticNotb, out=out, of=of);
+
+}

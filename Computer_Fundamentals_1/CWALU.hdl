@@ -1,0 +1,63 @@
+// This file is part of CSF 2019 Coursework Part Ⅰ
+// by 20126507 hnyzx3 Zichen Xu.
+
+/**CUSTOMIZED CHIP INSIDE
+ * >> ExpMult16     (Mult (16-bit) a with (4-bit) b)
+*/
+
+/**
+ * unsigned int Exponent Gate:  x^y
+ * a and b should be positive, x <= 9 && y <= 5
+ * Overflow detected
+*/
+
+CHIP CWALU {
+    IN
+        x[16], y[16],
+        S,  // Subtraction, x-y
+        M,  // Multiply x by y(both x y between +-100)
+        D,  // Divide (positive)x by 2, round down
+        F,  // Factorial, max x = 9, max y = 5, x y not negative
+        GL; // Return 1 if x is greater than y, -1 otherwise
+
+
+    OUT
+        out[16],
+        of; //Output overflow
+
+    PARTS:
+    // implement the function: Subtract y from x
+    Sub16(a=x, b=y, out=SubOut, of=SubOF);
+    // if function not selected, return 0
+    // which can realize <function selection> with the help of Or gate in the last
+    Mux16(a[0..15]=false, b=SubOut, sel=S, out=SubSelOut);
+    // detect subtraction overflow, the same <function selection> strategy as the one before
+    Mux(a=false, b=SubOF, sel=S, out=SubOFSelOut);
+
+    // implement the function: Multiply x by y, both x and y between +-100
+    Mult16(a=x, b=y, out=MultOut);
+    Mux16(a[0..15]=false, b=MultOut, sel=M, out=MultSelOut);
+
+    // implement the function: Divide (positive)x by 2, round down
+    Div16(a=x, out=DivOut);
+    Mux16(a[0..15]=false, b=DivOut, sel=D, out=DivSelOut);
+
+    // implement the function: Factorial, max x = 9, max y = 5, x and y not negative
+    Exp16(a=x, b=y, out=ExpOut, of=ExpOF);
+    Mux16(a[0..15]=false, b=ExpOut, sel=F, out=ExpSelOut);
+    Mux(a=false, b=ExpOF, sel=F, out=ExpOFSelOut);
+
+    // implement the function: Return 1 if x is greater than y, -1 otherwise
+    xGtry(a=x, b=y, out=GtrOut);
+    Mux16(a[0..15]=false, b=GtrOut, sel=GL, out=GtrSelOut);
+
+    // realize <function selection> by Or(ing) them together
+    Or(a=SubOFSelOut, b=ExpOFSelOut, out=of);
+
+    // realize <function selection> by Or(ing) them together
+    Or16(a=SubSelOut, b=MultSelOut, out=outTemp1);
+    Or16(a=outTemp1, b=DivSelOut, out=outTemp2);
+    Or16(a=outTemp2, b=ExpSelOut, out=outTemp3);
+    Or16(a=outTemp3, b=GtrSelOut, out=out);
+
+}

@@ -1,0 +1,31 @@
+// This file is part of CSF 2019 Coursework Part Ⅰ
+// by 20126507 hnyzx3 Zichen Xu.
+
+/**CUSTOMIZED CHIP INSIDE
+ * >> Null
+*/
+
+/**
+ * Decide if x is greater than y
+ * Output 1 if true, -1 otherwise
+ */
+
+CHIP xGtry {
+    IN
+        a[16], b[16];
+
+    OUT
+        out[16];
+
+    PARTS:
+    // Normal subtraction with Overflow detection
+	Sub16(a=b, b=a, out[15]=judgeSign, of=judgeOverflow);
+    Not(in=judgeSign, out=notJudgeSign);
+    // if Overflow, choose the negative of judgeSign, which will produce correct answer
+    Mux(a=notJudgeSign, b=judgeSign, sel=judgeOverflow, out=sel);
+    // if judgeSign is true, output 1, otherwise output -1
+    Mux16(a[0]=true, a[1..15]=false,
+          b[0..15]=true,
+          sel=sel, out=out);
+
+}

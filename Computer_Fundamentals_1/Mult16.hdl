@@ -1,0 +1,88 @@
+// This file is part of CSF 2019 Coursework Part Ⅰ
+// by 20126507 hnyzx3 Zichen Xu.
+
+/**CUSTOMIZED CHIP INSIDE
+ * >> Mult1with16   (Multiply 1-bit with 16-bit)
+ * >> Shamtl16      (Shift left by 1)
+*/
+
+/**
+ * 2's compliment int Multiplication Gate:
+ * a and b should between +-100
+ * out = a[16] * b[16]
+*/
+
+CHIP Mult16 {
+    IN
+        a[16], b[16];
+
+    OUT
+        out[16];
+
+    PARTS:
+    //convert negative to positive to do multi
+    //then sign is judged by a[15] and b[15]
+
+    //convert a
+    Not16(in=a, out=nota);
+    Inc16(in=nota, out=arithmaticNota);      //-a = (bitwise not of a) + increase by 1-bit 1.
+    Mux16(a=a, b=arithmaticNota, sel=a[15], out=absa);   //judged if < 0 do negative, otherwise don't
+                                                         //absa simply means the absolute value of a
+    //convert b
+    Not16(in=b, out=notb);
+    Inc16(in=notb, out=arithmaticNotb);      //-b = (bitwise not of b) + increase by 1-bit 1.
+    Mux16(a=b, b=arithmaticNotb, sel=b[15], out[0]=absb0,
+          out[1]=absb1, out[2]=absb2, out[3]=absb3,
+          out[4]=absb4, out[5]=absb5, out[6]=absb6);   //judged if < 0 do negative, otherwise don't
+          //absb@ means the bit at @'s location
+          //Don't need to add with 7th bit and else, Cause they are all 0s (a,b are between +-100)
+
+
+      /**
+    * For binary multiplication, The method is that:
+    * we follow the same process as multiplying two decimal numbers
+    * where we multiply each digit of the second number by the first whole number
+    * then we just need to add them
+    * switching the 16-bit multiplier one digit to the left before each multiplication
+      **/
+
+
+    Mult1with16(a = absa, b = absb0, out = total0);
+
+    Shamtl16(in = absa, out = aShamtl1);                    //switching the 16-bit multiplier left 1 digit
+    Mult1with16(a = aShamtl1, b = absb1, out = temp1);      //multiply each digit of the second number by the first whole number
+    Add16(a=total0, b=temp1, out=total1);                   //then add the results
+
+    // the following procedure is the same as the previous one
+    // further explanation is unnecessary
+
+    Shamtl16(in = aShamtl1, out = aShamtl2);
+    Mult1with16(a = aShamtl2, b = absb2, out = temp2);
+    Add16(a=total1, b=temp2, out=total2);
+
+
+    Shamtl16(in = aShamtl2, out = aShamtl3);
+    Mult1with16(a = aShamtl3, b = absb3, out = temp3);
+    Add16(a=total2, b=temp3, out=total3);
+
+    Shamtl16(in = aShamtl3, out = aShamtl4);
+    Mult1with16(a = aShamtl4, b = absb4, out = temp4);
+    Add16(a=total3, b=temp4, out=total4);
+
+    Shamtl16(in = aShamtl4, out = aShamtl5);
+    Mult1with16(a = aShamtl5, b = absb5, out = temp5);
+    Add16(a=total4, b=temp5, out=total5);
+
+    Shamtl16(in = aShamtl5, out = aShamtl6);
+    Mult1with16(a = aShamtl6, b = absb6, out = temp6);
+    Add16(a=total5, b=temp6, out=total);
+
+    //judge sign by a[15] and b[15]
+
+    Or(a=a[15], b=b[15], out=sign);
+    Not16(in=total, out=nottotal);
+    Inc16(in=nottotal, out=arithmaticNottotal);   //calculate the arithmaticNot of total
+    Mux16(a=total, b=arithmaticNottotal, sel=sign, out=out);
+    //judged whether the result should < 0 , if, do negative, otherwise don't
+}
+

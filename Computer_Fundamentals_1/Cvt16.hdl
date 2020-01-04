@@ -1,0 +1,31 @@
+// This file is the helper function of ALU
+
+
+/**
+ * Cvt16 gate:
+ * out = 1111111111111111 if in = 1
+ * 0000000000000000 otherwise
+ */
+
+CHIP Cvt16 {
+    IN in;
+    OUT out;
+
+    PARTS:
+	OR16(a[0]=0, b[0]=in out=out[0]);
+	OR16(a[1]=0, b[1]=in out=out[1]);
+	OR16(a[2]=0, b[2]=in out=out[2]);
+	OR16(a[3]=0, b[3]=in out=out[3]);
+	OR16(a[4]=0, b[4]=in out=out[4]);
+	OR16(a[5]=0, b[5]=in out=out[5]);
+	OR16(a[6]=0, b[6]=in out=out[6]);
+	OR16(a[7]=0, b[7]=in out=out[7]);
+	OR16(a[8]=0, b[8]=in out=out[8]);
+	OR16(a[9]=0, b[9]=in out=out[9]);
+	OR16(a[10]=0, b[10]=in out=out[10]);
+	OR16(a[11]=0, b[11]=in out=out[11]);
+	OR16(a[12]=0, b[12]=in out=out[12]);
+	OR16(a[13]=0, b[13]=in out=out[13]);
+	OR16(a[14]=0, b[14]=in out=out[14]);
+	OR16(a[15]=0, b[15]=in out=out[15]);
+}

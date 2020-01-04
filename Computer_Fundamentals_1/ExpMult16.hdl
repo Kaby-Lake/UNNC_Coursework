@@ -1,0 +1,53 @@
+// This file is part of CSF 2019 Coursework Part Ⅰ
+// by 20126507 hnyzx3 Zichen Xu.
+
+/**CUSTOMIZED CHIP INSIDE
+ * >> Mult1with16   (Multiply 1-bit with 16-bit)
+ * >> Shamtl16      (Shift left by 1)
+*/
+
+/**
+ * Unsigned int Multiplication Gate:
+ * a should between 0 and 8191, b should between 0 and 15
+ * Overflow detected
+ * out = a[16] * b[3]
+*/
+
+CHIP ExpMult16 {
+    IN
+        a[16], b[4];
+
+    OUT
+        out[16], of;
+
+    PARTS:
+
+    //convert a
+
+      /**
+    * For binary multiplication, The method is that:
+    * we follow the same process as multiplying two decimal numbers
+    * where we multiply each digit of the second number by the first whole number
+    * then we just need to add them
+    * switching the 16-bit multiplier one digit to the left before each multiplication
+      **/
+
+
+    Mult1with16(a=a, b=b[0], out=total0);
+
+    Shamtl16(in=a, out=aShamtl1);                    //switching the 16-bit multiplier left 1 digit
+    Mult1with16(a=aShamtl1, b=b[1], out=temp1);      //multiply each digit of the second number by the first whole number
+    Add16(a=total0, b=temp1, out=total1);                   //then add the results
+
+    // the following procedure is the same as the previous one
+    // further explanation is unnecessary
+
+    Shamtl16(in=aShamtl1, out=aShamtl2);
+    Mult1with16(a=aShamtl2, b=b[2], out=temp2);
+    Add16(a=total1, b=temp2, out=total2);
+
+    Shamtl16(in=aShamtl2, out=aShamtl3);
+    Mult1with16(a=aShamtl3, b=b[3], out=temp3);
+    Add16(a=total2, b=temp3, out=out, out[15] = of);
+}
+

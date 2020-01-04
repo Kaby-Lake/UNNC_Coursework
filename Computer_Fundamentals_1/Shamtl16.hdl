@@ -1,0 +1,22 @@
+// This file is part of CSF 2019 Coursework Part Ⅰ
+// by 20126507 hnyzx3 Zichen Xu.
+
+/**CUSTOMIZED CHIP INSIDE
+ * >> Null
+*/
+
+/**
+ * shift left by 1 bit:
+ */
+
+CHIP Shamtl16 {
+    IN
+        in[16];
+
+    OUT
+        out[16];
+
+    PARTS:
+	And16(a=in, b[0..15]=true, out=andout);
+    Add16(a=in, b=andout, out=out);
+}
