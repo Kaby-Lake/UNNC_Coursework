@@ -305,7 +305,7 @@ ListNode * loadFile(int * flag, ListNode * mainHEAD){
 
     // the file must be invalid if does not end with readSign = 0
     if(readSign != 0){
-        fclose(fp);
+        // fclose(fp);
         *flag = 0;
         freeMem(HEAD);
         return NULL;

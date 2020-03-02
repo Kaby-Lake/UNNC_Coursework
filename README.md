@@ -4,13 +4,13 @@
 
 | Coursework | Mark |
 | :------: | :------: |
-| [Computer Fundamentals 1](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Computer_Fundamentals_1) | ?? / 25 |
-| [Computer Fundamentals 2](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Computer_Fundamentals_2) | ?? / 25 |
-| [System And Architecture](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/System_and_Architecture) | ??? / 100 |
-| [Programming And Algorithms](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Programming_and_Algorithms) | ??? / 100 |
+| [Computer Fundamentals 1](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Computer_Fundamentals_1) | 25 / 25 |
+| [Computer Fundamentals 2](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Computer_Fundamentals_2) | 25 / 25 |
+| [System and Architecture](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/System_and_Architecture) | ??? / 100 |
+| [Programming and Algorithms](https://github.com/Kaby-Lake/UNNC_Coursework/tree/master/Programming_and_Algorithms) | ?? / 45 |
 
 
-**Computer Fundamentals 1** is based on Nand2Tetris HDL Language
-**Computer Fundamentals 2** is based on Nand2Tetris Hack Assembly Language
-**System And Architecture** is based on MIPS32 Assembly Language
-**Programming And Algorithms** is based on C Programming Language
+_**Programming and Algorithms**: is based on Nand2Tetris HDL Language_  
+_**Computer Fundamentals 2** is based on Nand2Tetris Hack Assembly Language_  
+_**System and Architecture** is based on MIPS32 Assembly Language_  
+_**Programming And Algorithms** is based on C Programming Language_
